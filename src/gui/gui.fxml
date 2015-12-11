@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
+    <right>
+      <Pane prefHeight="300.0" prefWidth="148.0" style="-fx-background-color: GRAY;">
+         <children>
+              <VBox fx:id="inventory" alignment="CENTER" prefHeight="302.0" prefWidth="70.0" style="-fx-background-color: Gray;" visible="false" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fx:id="inventorySpace" strokeType="OUTSIDE" strokeWidth="0.0" text="0/20">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Separator prefHeight="10.0" prefWidth="70.0" visible="false" />
+                  <ImageView fitHeight="43.0" fitWidth="70.0" onMouseClicked="#useHealthPotion" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/dungeon/health_potion.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="healthCount" text="0" />
+                  <ImageView fitHeight="43.0" fitWidth="70.0" onMouseClicked="#useExpPotion" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/dungeon/exp_potion.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="expCount" text="0" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+    </right>
+    <bottom>
+      <Pane prefHeight="109.0" prefWidth="605.0" style="-fx-background-color: GRAY;">
+         <children>
+            <Pane fx:id="adventurePane" visible="false">
+               <children>
+                  <Pane>
+                     <children>
+                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="605.0" style="-fx-background-color: GRAY;" BorderPane.alignment="CENTER">
+                              <children>
+                              <VBox alignment="BOTTOM_CENTER" fillWidth="false" prefHeight="100.0" prefWidth="50.0">
+                                 <children>
+                                    <Text fx:id="savedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Saved" visible="false" />
+                                    <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveHero" text="Save">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.26" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              <Separator opacity="0.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="75.0" />
+                                  <Button mnemonicParsing="false" onAction="#enterCombat" prefHeight="61.0" prefWidth="67.0" text="Attack">
+                                 <effect>
+                                    <ColorAdjust brightness="-0.26" />
+                                 </effect>
+                              </Button>
+                                  <VBox alignment="CENTER">
+                                      <children>
+                                          <ImageView fx:id="portrait" fitHeight="42.0" fitWidth="53.0" onMouseClicked="#viewProfile" pickOnBounds="true" preserveRatio="true" />
+                                          <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                          <ProgressBar fx:id="expBar" prefHeight="0.0" prefWidth="200.0" progress="0.08" />
+                                    <ProgressBar fx:id="healthBar" prefHeight="0.0" prefWidth="200.0" progress="1.0">
+                                       <effect>
+                                          <ColorAdjust hue="-0.47" />
+                                       </effect>
+                                    </ProgressBar>
+                                      </children>
+                                  </VBox>
+                                  <Button mnemonicParsing="false" onAction="#inspect" prefHeight="63.0" prefWidth="67.0" text="Inspect">
+                                 <effect>
+                                    <ColorAdjust brightness="-0.26" hue="-0.28" />
+                                 </effect>
+                              </Button>
+                              <VBox fx:id="inspectPane" alignment="CENTER" prefHeight="100.0" prefWidth="86.0" visible="false">
+                                 <children>
+                                    <Text fx:id="inspectType" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fx:id="inspectHealth" strokeType="OUTSIDE" strokeWidth="0.0" text="Health" />
+                                    <Text fx:id="inspectAttack" strokeType="OUTSIDE" strokeWidth="0.0" text="Attack" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="BOTTOM_CENTER" fillWidth="false" prefHeight="100.0" prefWidth="50.0">
+                                 <children>
+                                    <Separator opacity="0.0" prefWidth="200.0" />
+                                    <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exitToStart" text="Exit">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.26" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                              </children>
+                          </HBox>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="startPane" style="-fx-background-color: GRAY;" visible="false">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="605.0">
+                     <children>
+                        <Pane prefHeight="100.0" prefWidth="239.0">
+                           <children>
+                              <Label layoutX="94.0" layoutY="5.0" prefHeight="19.0" prefWidth="120.0" text="Choose Hero's class:">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="63.0" fitWidth="49.0" layoutX="79.0" layoutY="25.0" onMouseClicked="#selectMage" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/sprites/mage_portrait.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="55.0" fitWidth="48.0" layoutX="128.0" layoutY="31.0" onMouseClicked="#selectKnight" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/sprites/knight_portrait.png" />
+                                 </image>
+                              </ImageView>
+                              <Text layoutX="88.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mage" />
+                              <Text layoutX="132.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Knight" />
+                              <Rectangle fx:id="mageSelect" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="77.0" layoutX="78.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="50.0" />
+                              <Rectangle fx:id="knightSelect" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="77.0" layoutX="124.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="52.0" />
+                              <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="175.0" layoutY="31.0" onMouseClicked="#selectRogue" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/sprites/rogue_portrait.png" />
+                                 </image>
+                              </ImageView>
+                              <Text layoutX="181.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rogue" />
+                              <Rectangle fx:id="rogueSelect" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="77.0" layoutX="174.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="50.0" />
+                           </children>
+                        </Pane>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="155.0">
+                           <children>
+                              <Text fx:id="aboutClass" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" />
+                           </children>
+                        </VBox>
+                        <Pane prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="38.0" layoutY="5.0" text="Enter Hero's name:">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="nameInput" layoutX="19.0" layoutY="25.0">
+                                 <effect>
+                                    <ColorAdjust brightness="-0.23" contrast="-0.3" />
+                                 </effect>
+                              </TextField>
+                              <Button fx:id="startButton" layoutX="67.0" layoutY="64.0" mnemonicParsing="false" onAction="#startGame" text="START">
+                                 <effect>
+                                    <ColorAdjust brightness="-0.35" contrast="0.07" />
+                                 </effect>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="loadPane" prefHeight="100.0" prefWidth="605.0" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="593.0" style="-fx-background-color: GRAY;" BorderPane.alignment="CENTER">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="224.0">
+                           <children>
+                              <Label text="Select your Hero:" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Separator opacity="0.0" prefHeight="5.0" prefWidth="200.0" />
+                              <ChoiceBox fx:id="characterChoice" prefHeight="25.0" prefWidth="167.0" />
+                              <Separator opacity="0.0" prefHeight="10.0" prefWidth="200.0" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clearChoice" text="CLEAR" visible="false">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.35" contrast="0.07" />
+                                       </effect>
+                                    </Button>
+                                    <Separator orientation="VERTICAL" prefHeight="25.0" prefWidth="76.0" visible="false" />
+                                    <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadCharacter" text="VIEW">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.35" contrast="0.07" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Pane prefHeight="100.0" prefWidth="237.0">
+                           <children>
+                              <VBox alignment="TOP_CENTER" layoutX="-3.0" layoutY="-1.0" prefHeight="101.0" prefWidth="240.0">
+                                 <children>
+                                    <ImageView fx:id="loadingView" fitHeight="72.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="loadingName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" visible="false" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="combatPane" prefHeight="100.0" prefWidth="605.0" visible="false">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="605.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="303.0">
+                           <children>
+                              <ProgressBar fx:id="combatHeroHealth" prefHeight="30.0" prefWidth="303.0" progress="0.46">
+                                 <effect>
+                                    <ColorAdjust hue="-0.42" />
+                                 </effect>
+                              </ProgressBar>
+                              <Label fx:id="combatHeroName" text="Name | Level">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="303.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#attack" prefHeight="35.0" prefWidth="59.0" text="ATTACK">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.26" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="302.0">
+                           <children>
+                              <ProgressBar fx:id="combatMonsterHealth" prefHeight="30.0" prefWidth="303.0" progress="0.8">
+                                 <effect>
+                                    <ColorAdjust hue="0.91" />
+                                 </effect>
+                              </ProgressBar>
+                              <Label fx:id="combatMonsterName" text="Monster Type">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="302.0">
+                                 <children>
+                                    <Button fx:id="runButton" mnemonicParsing="false" onAction="#run" prefHeight="35.0" prefWidth="52.0" text="RUN">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.26" />
+                                       </effect>
+                                    </Button>
+                                    <Separator opacity="0.0" orientation="VERTICAL" prefHeight="35.0" prefWidth="210.0" />
+                                    <Button mnemonicParsing="false" onAction="#exitToStart" text="Exit">
+                                       <effect>
+                                          <ColorAdjust brightness="-0.26" />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+    </bottom>
+   <left>
+        <Canvas fx:id="canvas" height="300.0" nodeOrientation="INHERIT" width="535.0" BorderPane.alignment="CENTER">
+            <cursor>
+                <Cursor fx:constant="CROSSHAIR" />
+            </cursor>
+        </Canvas>
+   </left>
+</BorderPane>
