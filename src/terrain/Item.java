@@ -8,10 +8,8 @@ public class Item extends Drawable{
 	
 	public Item(ItemType type){
 		this.type = type;
-		this.sprite = type.getAvatar();
+		this.sprite = type.getSprite();
 	}
-	
-	
 	
 	public ItemType getType(){
 		return type;

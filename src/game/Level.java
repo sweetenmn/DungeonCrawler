@@ -8,10 +8,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
-import terrain.Exit;
-import terrain.Floor;
 import terrain.Item;
-import terrain.Wall;
+import terrain.Terrain;
+import terrain.TerrainType;
 import util.Dice;
 
 import java.io.File;
@@ -77,7 +76,7 @@ public class Level extends Drawable{
 
     public void addFloor(int x, int y){
         Position p = new Position(x, y);
-        contents.add(new Floor(p));
+        contents.add(new Terrain(TerrainType.FLOOR, p));
     }
     public void addMonster(int x, int y){
         Monster monster = new Monster(hero.getMapLevel());
@@ -119,13 +118,13 @@ public class Level extends Drawable{
 
     public void addWall(int x, int y){
         Position p = new Position(x, y);
-        contents.add(new Wall(p));
+        contents.add(new Terrain(TerrainType.WALL, p));
         wallMap[p.getX()][p.getY()] = true;
     }
 
     public void addExit(int x, int y){
         Position p = new Position(x, y);
-        contents.add(new Exit(p));
+        contents.add(new Terrain(TerrainType.EXIT, p));
         this.exit = p;
     }
 
